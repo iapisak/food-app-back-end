@@ -34,7 +34,7 @@ const signup = async (req, res) => {
             const salt = await bcrypt.genSalt(10);
             const hash = await bcrypt.hash(req.body.password, salt);
             const createUser = { ...req.body, password: hash }
-            const user = db.User.create({ createUser })
+            const user = await db.User.create(createUser)
             return res.status(200).json({ status: 200, id: user._id})
         }
     } catch {

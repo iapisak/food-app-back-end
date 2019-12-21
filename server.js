@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const Mongostore = require('connect-mongo')(session);
 const cors = require('cors');
-
 const PORT = process.env.PORT || 4000;
 require('dotenv').config();
 
@@ -27,7 +26,7 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 7,
-    }
+    },
 }));
 
 // Routes //
