@@ -42,10 +42,19 @@ const signup = async (req, res) => {
     }
 }
 
+const mustBeLoggedIn = (req, res, next) => {
+    if (req.session.currentUser) {
+        next()
+    } else {
+        res.redirect('/')
+    }
+}
+
 module.exports = {
     login,
     logout,
     signup,
+    mustBeLoggedIn,
 }
 
 
