@@ -4,12 +4,19 @@ const UserSchema = new Schema({
     name: {
         type: String,
     },
+
+    lastName: {
+        type: String,
+    },
+
     email: {
         type: String,
     },
+
     password: {
         type: String,
     },
+
     signup_date: {
         type: Date,
         default: Date.now,

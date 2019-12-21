@@ -9,7 +9,7 @@ const login = async (req, res) => {
             req.session.currentUser = getUser.id
             return res.status(200).json({ status: 200, id: getUser.id });
         } else {
-            return res.status(400).json({ status: 400, error: 'Invalid password'});
+            return res.status(500).json({ status: 500, error: 'Invalid password'});
         }
     } catch {
         return res.status(500).json({ status: 500, error: 'Invalid Email' });
