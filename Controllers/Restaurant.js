@@ -1,28 +1,34 @@
 const db = require('../Models');
 
-const requestAndCreateRestaurant = async (req, res) => {
+const getRestaurant = async (req, res) => {
     const postal_code = req.params.res_id
     try {
-        const foundRestaurant = await db.Restaurant.findOne({ postal_code: postal_code });
+        const foundRestaurant = await db.Restaurant.findOne({ restaurant: [ { postal_code: postal_code } ] });
         return res.status(200).json({ status: 200, data: foundRestaurant });
     } catch {
-        const result = []
-        fetch(`https://us-restaurant-menus.p.rapidapi.com/restaurants/zip_code/${postal_code}?page=1`, {
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com",
-                "x-rapidapi-key": "fe0837f0a2msh7cb5dab4b0d98c6p1b7249jsn44b6d3c3edbf"
+        return res.status(500).json({ status: 500, error: 'Could not find this restaurant' })
+    }
+}
+
+const createRestaurant = async (req, res) => {
+    console.log(req.body)
+    const newArray = {
+        restaurant: [
+            { 
+                postal_code: req.body.postal_code,
+                result: req.body.result
             }
-        })
-        .then(res => {
-            result = res.result.data
-            const createNewRestaurant = db.Restaurant.create({ postal_code: postal_code, result });
-            return res.status(200).json({ status: 200, data: createNewRestaurant });
-        })
-        .catch(err => console.log(err));
+        ]
+    } 
+    try {
+        const newRestaurant = await db.Restaurant.create(newArray);
+        return res.status(200).json({ status: 200, data: newRestaurant });
+    } catch {
+        return res.status(500).json({ status: 500, error: 'Could not create this restaurant'})
     }
 }
 
 module.exports = {
-    requestAndCreateRestaurant,
+    getRestaurant,
+    createRestaurant,
 }
