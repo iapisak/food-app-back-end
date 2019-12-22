@@ -4,7 +4,7 @@ const RestaurantSchema = new Schema({
     restaurant: [
         {
             post_code: {
-                type: Number
+                type: String
             },
 
             result: {
