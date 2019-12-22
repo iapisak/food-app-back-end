@@ -8,6 +8,7 @@ router.put('/signup', ctrl.auth.signup)
 router.delete('/logout', ctrl.auth.logout)
 
 // -- Restaurant --- //
-router.get('/restaurant/:res_id', ctrl.restaurant.requestAndCreateRestaurant)
+router.get('/restaurant/:res_id', ctrl.restaurant.getRestaurant)
+router.put('/restaurant/create', ctrl.restaurant.createRestaurant)
 
 module.exports = router;
