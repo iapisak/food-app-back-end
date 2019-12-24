@@ -1,5 +1,5 @@
 module.exports = {
     auth: require('./Auth'),
-    restaurant: require('./Restaurant'),
+    city: require('./City'),
     menu: require('./Menu'),
 }
