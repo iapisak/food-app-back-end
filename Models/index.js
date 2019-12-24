@@ -12,6 +12,6 @@ mongoose.connect(port, {
 
 module.exports = {
     User: require('./User'),
-    Restaurant: require('./Restaurant'),
+    City: require('./City'),
     Menu: require('./Menu'),
 }
